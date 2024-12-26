@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block main %}
+<div class="container col-xxl-3 px-4 py-5">
+    <h1>Register a new account</h1>
+    <form action="/register" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Username</label>
+            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username"
+                value="{{ request.form['username'] if request.form else '' }}" type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Email</label>
+            <input autocomplete="off" autofocus class="form-control" name="email" placeholder="Email"
+                value="{{ request.form['email'] if request.form else '' }}" type="email" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <input autocomplete="off" autofocus class="form-control" name="name" placeholder="Name"
+                value="{{ request.form['name'] if request.form else '' }}" type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Location</label>
+            <input autocomplete="off" autofocus class="form-control" name="location" placeholder="Location"
+                value="{{ request.form['location'] if request.form else '' }}" type="text" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Password</label>
+            <input class="form-control" name="password" placeholder="Password"
+                value="{{ request.form['password'] if request.form else '' }}" type="password" required>
+        </div>
+        <div class="mb-3">
+            <label for="name" class="form-label">Password confirmation</label>
+            <input class="form-control" name="confirmation" placeholder="Password confirmation" type="password"
+                required>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Register</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block main %}
+<div class="container-fluid px-4 py-4">
+    <div class="row flex-lg-row-reverse align-items-top g-5 py-2">
+        <div class="col-12">
+            <h1 class="display-6 fw-bold">Welcome back, {{ user.name }}!</h1>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Stats</h1>
+            <div class="row py-4">
+                <div class="col">
+                    <h3>This week</h3>
+                    <h4>{{ stats['week'].distance | format_distance }} km</h4>
+                    <h4>{{ stats['week'].elevation | format_distance }} m</h4>
+                    <h4>{{ stats['week'].duration | format_minutes }} h</h4>
+                </div>
+                <div class="col">
+                    <h3>This month</h3>
+                    <h4>{{ stats['month'].distance | format_distance }} km</h4>
+                    <h4>{{ stats['month'].elevation | format_distance }} m</h4>
+                    <h4>{{ stats['month'].duration | format_minutes }} h</h4>
+                </div>
+                <div class="col">
+                    <h3>This Year</h3>
+                    <h4>{{ stats['year'].distance | format_distance }} km</h4>
+                    <h4>{{ stats['year'].elevation | format_distance }} m</h4>
+                    <h4>{{ stats['year'].duration | format_minutes }} h</h4>
+                </div>
+            </div>
+            <div class="row py-4">
+                <div class="col text-center">
+                    <h3>All Time</h3>
+                    <h4>{{ stats['alltime'].distance | format_distance }} km | {{ stats['alltime'].elevation |
+                        format_distance}} m | {{ stats['alltime'].duration | format_minutes }} h</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Rides</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Date</th>
+                        <th scope="col">Distance</th>
+                        <th scope="col">Elevation</th>
+                        <th scope="col">Duration</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for ride in rides %}
+                    <tr>
+                        <th scope="row">{{ ride.date.strftime('%d/%m/%Y') }}</th>
+                        <td>{{ ride.distance }} km</td>
+                        <td>{{ ride.elevation}} m</td>
+                        <td>{{ ride.duration | format_minutes }}</td>
+                        <td>
+                            <a class="btn btn-primary btn-sm" href="{{ url_for('updateride', id=ride['id']) }}"
+                                role="button">edit</a>
+                            <a class="btn btn-danger btn-sm" href="{{ url_for('deleteride', id=ride['id']) }}"
+                                role="button">delete</a>
+                        </td>
+                        {% endfor %}
+                    </tr>
+                </tbody>
+            </table>
+            <a class="btn btn-primary btn-sm" href="{{ url_for('newride') }}" role="button">new ride</a>
+        </div>
+        <div class="col-12">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Milestones</h1>
+            <div class="row py-4">
+                <div class="col">
+                    <h4>Around the World</h4>
+                    <!-- 40075 km -->
+                    <div class="progress" role="progressbar" aria-label="Around the World"
+                        aria-valuenow="{{ stats['alltime'].distance }}" aria-valuemin="0" aria-valuemax="40075">
+                        <div class="progress-bar bg-success" style="width: {{ stats['around-the-world'].percent }}%">
+                        </div>
+                    </div>
+                    <i>{{ stats['alltime'].distance }} / 40.075 km - {{ stats['around-the-world'].percent|round(2)
+                        }}%</i>
+                </div>
+                <div class="col">
+                    <h4>Climb Mount Everest</h4>
+                    <!-- 8848 km-->
+                    <div class="progress" role="progressbar" aria-label="Around the World"
+                        aria-valuenow="{{ stats['alltime'].elevation }}" aria-valuemin="0" aria-valuemax="8848">
+                        <div class="progress-bar bg-warning" style="width: {{ stats['climb-everest'].percent }}%">
+                        </div>
+                    </div>
+                    <i>{{ stats['alltime'].elevation }} / 8.848 m - {{
+                        stats['climb-everest'].percent|round(2)}}%</i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

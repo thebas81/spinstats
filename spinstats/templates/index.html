@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Home page
+{% endblock %}
+
+{% block main %}
+<div class="container col-xxl-8 px-4 py-5">
+    <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+        <div class="col-10 col-sm-8 col-lg-6">
+            <img src="{{ url_for('static', filename='splash-image.jpg' ) }}" class="d-block mx-lg-auto img-fluid"
+                alt="SpinStats splash image" width="700" height="500" loading="lazy">
+        </div>
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold text-body-emphasis lh-1 mb-3">Welcome to SpinStats</h1>
+            <p class="lead">Your ultimate companion for cycling enthusiasts!</p>
+
+            <p>With SpinStats, you can easily:</p>
+            <ul>
+                <li><b>Log your rides</b>: Record every cycling session, from casual rides to intense training.</li>
+                <li><b>Track your progress</b>: Keep a detailed history of your workouts and monitor your improvements
+                    over time.</li>
+            </ul>
+            <p>Whether you're a weekend rider or a competitive cyclist, SpinStats is here to help you stay motivated,
+                set goals, and achieve them.</p>
+
+            <p>Join now and take your cycling journey to the next level!</p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                {% if session["user_id"] %}
+                <a class="btn btn-primary" href="{{ url_for('dashboard') }}" role="button">Dashboard</a>
+                {% else %}
+                <a class="btn btn-primary" href="{{ url_for('login') }}" role="button">Login</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Edit ride
+{% endblock %}
+
+{% block main %}
+<div class="container col-xxl-3 px-4 py-5">
+    <h1>Edit the ride</h1>
+    <form method="post">
+        <div class="mb-3">
+            <label for="distance" class="form-label">Distance (km)</label>
+            <input autocomplete="off" autofocus class="form-control" name="distance"
+                value="{{ request.form['distance'] or ride.distance }}" type="
+                number" required>
+        </div>
+        <div class="mb-3">
+            <label for="elevation" class="form-label">Elevation (m)</label>
+            <input autocomplete="off" autofocus class="form-control" name="elevation"
+                value="{{ request.form['elevation'] or ride.elevation }}" type="number" required>
+        </div>
+        <div class="mb-3">
+            <label for="duration" class="form-label">Duration (minutes)</label>
+            <input autocomplete="off" autofocus class="form-control" name="duration"
+                value="{{ request.form['duration'] or ride.duration }}" type="number" required>
+        </div>
+        <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input autocomplete="off" autofocus class="form-control" name="date"
+                value="{{ request.form['date'] or ride.date.strftime('%Y-%m-%d') }}" type="date" required>
+        </div>
+        <button class="btn btn-primary w-100" type="submit">Update ride</button>
+    </form>
+</div>
+{% endblock %}

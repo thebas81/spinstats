@@ -1,5 +1,5 @@
 # SPINSTATS
-#### Video Demo:  <URL HERE>
+#### Video Demo:  https://youtu.be/kOJl1D7dtoE
 #### Description:
 Spinstats is web application built in Flask where a cyclist can record rides and consult training history, complete with weekly, monthly, yearly and all-time stats.\
 With this app it's also possible to track the progress to reach big milestones, like riding all around the world or climbing mount Everest!
